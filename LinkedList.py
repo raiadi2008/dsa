@@ -16,7 +16,6 @@ class Node:
 		self.next_node = next_node
 
 class  LinkedList:
-
 	def __init__(self, value = None):
 		self.head_node = value
 
