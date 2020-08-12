@@ -17,19 +17,20 @@ class Node:
 
 class  LinkedList:
 	def __init__(self, value = None):
-		self.head_node = value
+		self.head_node, self.tail_node = value, value
 
 	def insert_beginning(self, value = None):
-		self.head_node = Node(value,self.head_node)
-
+		if self.head_node == None:
+			self.head_node = self.tail_node = Node(value,self.head_node)
+		else :
+			self.head_node = Node(value,self.head_node)
+		
 	def insert_end(self, value = None):
-		cur_node = self.head_node
-		while cur_node:
-			if cur_node.get_next_node() == None:
-				cur_node.set_next_node(Node(value))
-				break
-			else :
-				cur_node = cur_node.get_next_node()
+		if self.head_node == None:
+			self.head_node = self.tail_node = Node(value,self.head_node)
+		else :
+			self.tail_node.set_next_node(Node(value))
+			self.tail_node = self.tail_node.get_next_node()
 
 	def traverse_list(self):
 		cur_node = self.head_node
@@ -84,53 +85,19 @@ class  LinkedList:
 
 
 if __name__ == "__main__" :
-	a = Node(4)
-	b = Node(6,a)
-	c = Node(7,b)
-	d = Node(13,c)
-	ll = LinkedList(d)
-	print("printing list")
-	ll.traverse_list()
-	ll.delete_node(4)
-	print("deleting 4 and printing list")
+	ll = LinkedList()
+	print("Printing List : ")
 	ll.traverse_list()
 	ll.insert_beginning(5)
-	ll.insert_end(9)
-	print("inserted in begining and in end")
+	print("Printing List : ")
 	ll.traverse_list()
-	ll.insert_after(9,16)
-	ll.insert_after(13,122)
-	ll.insert_after(11,124)
-	print("traversing again")
+	ll.insert_beginning(2345234)
+	print("Printing List : ")
 	ll.traverse_list()
-	ll.insert_before(5,155)
-	ll.insert_before(16,95)
-	ll.insert_before(0,0)
-	print("travesing again")
-	ll.traverse_list()
-	if ll.search_value(1111):
-		print("found 1111 in list")
-	else :
-		print("did not found 1111 in list")
-
-	if ll.search_value(9):
-		print("found 9 in the list")
-
-	ll.delete_node(155)
-	ll.delete_node(5)
-	ll.delete_node(13)
-	ll.delete_node(122)
-	ll.delete_node(7)
-	ll.delete_node(6)
-	ll.delete_node(9)
-	ll.delete_node(95)
-	ll.delete_node(16)
-	print("printing list after deleting all the elements")
-	ll.traverse_list()
-	ll.delete_node(54)
-	ll.traverse_list()
-	ll.insert_after(145, 53)
-	ll.insert_before(65, 55)
-	ll.traverse_list()
-
-
+	ll2 = LinkedList()
+	ll2.insert_end(44)
+	print("Printing List : ")
+	ll2.traverse_list()
+	ll2.insert_end(2341234)
+	print("Printing List : ")
+	ll2.traverse_list()
