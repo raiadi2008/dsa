@@ -1,23 +1,23 @@
 class Node:
-	def __init__(self, value, next_node = None):
-		self.value = value
-		self.next_node = next_node
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next_node = next_node
 
-	def get_next_node(self):
-		return self.next_node
+    def get_next_node(self):
+        return self.next_node
 
-	def get_value(self):
-		return self.value
+    def get_value(self):
+        return self.value
 
-	def set_value(self, value):
-		self.value = value
-		
-	def set_next_node(self, next_node):
-		self.next_node = next_node
+    def set_value(self, value):
+        self.value = value
+
+    def set_next_node(self, next_node):
+        self.next_node = next_node
 
 
 class CircularLinkedList:
-    def __init__(self, node = None):
+    def __init__(self, node=None):
         self.head_node = node
         self.tail_node = None
         if self.head_node == None:
@@ -35,8 +35,8 @@ class CircularLinkedList:
             cur_node = cur_node.get_next_node()
             if cur_node is self.head_node:
                 break
-    
-    def insert_beginning(self,value):
+
+    def insert_beginning(self, value):
         if self.head_node == None:
             self.head_node = Node(value)
             self.tail_node = self.head_node
@@ -45,38 +45,41 @@ class CircularLinkedList:
             self.head_node = Node(value, self.head_node)
             self.tail_node.set_next_node(self.head_node)
 
-    def insert_after(self,key,value):
+    def insert_after(self, key, value):
         if self.head_node != None:
             cur_node = self.head_node
             while cur_node:
                 if cur_node.get_value() == key:
-                    cur_node.set_next_node(Node(value, cur_node.get_next_node()))
+                    cur_node.set_next_node(
+                        Node(value, cur_node.get_next_node()))
                     if cur_node is self.tail_node:
                         self.tail_node = cur_node.get_next_node()
                     break
-                else :
+                else:
                     cur_node = cur_node.get_next_node()
                 if cur_node is self.head_node:
                     break
 
     def insert_before(self, key, value):
         if self.head_node == None:
-            return                                  # since there is no node in the list you can't add after
-        if self.head_node.get_value() == key :
-            self.head_node = Node(value,self.head_node)
+            # since there is no node in the list you can't add after
+            return
+        if self.head_node.get_value() == key:
+            self.head_node = Node(value, self.head_node)
             self.tail_node.set_next_node(self.head_node)
-        else :
+        else:
             cur_node = self.head_node
             while cur_node:
                 if cur_node.get_next_node() is self.head_node:
                     break
                 if cur_node.get_next_node().get_value() == key:
-                    cur_node.set_next_node(Node(value,cur_node.get_next_node()))
+                    cur_node.set_next_node(
+                        Node(value, cur_node.get_next_node()))
                     break
                 else:
-                     cur_node = cur_node.get_next_node()
-                
-    def delete_node(self,key):
+                    cur_node = cur_node.get_next_node()
+
+    def delete_node(self, key):
         if self.head_node:
             if self.head_node.get_value() == key:
                 if self.head_node is self.head_node.get_next_node():
@@ -89,7 +92,8 @@ class CircularLinkedList:
                 cur_node = self.head_node
                 while cur_node:
                     if cur_node.get_next_node().get_value() == key:
-                        cur_node.set_next_node(cur_node.get_next_node().get_next_node())
+                        cur_node.set_next_node(
+                            cur_node.get_next_node().get_next_node())
                         break
                     else:
                         cur_node = cur_node.get_next_node()
